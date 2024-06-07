@@ -79,10 +79,13 @@ def download_speech(speech_url):
                 pharagraphs.append(
                     turn_html_into_markdown(child)
                     )
-        elif child.name == 'ul':
+        elif child.name == 'ul' or child.name == 'ol':
             for li in child.find_all('li'):
                 pharagraphs.append(
                     turn_html_into_markdown(li))
+        elif len(child.name) == 2 and child.name[0] == 'h':
+            pharagraphs.append(
+                turn_html_into_markdown(child))
         else:
             print(f"Unknown tag: {child.name}")
 
